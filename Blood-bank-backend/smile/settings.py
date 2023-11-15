@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'recipient.apps.RecipientConfig',
+    'donor.apps.DonorConfig',
     'corsheaders',#custom addded
     'django.contrib.admin',
     'django.contrib.auth',
@@ -50,6 +52,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware', # custom added
     'corsheaders.middleware.CorsMiddleware', #custom added
+    
 ]
 
 
@@ -121,10 +124,14 @@ WSGI_APPLICATION = 'smile.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'default': {
+            'ENGINE': 'djongo',
+            'NAME': 'blood_bank',
+            'ENFORCE_SCHEMA': False,
+            'CLIENT': {
+                'host': 'mongodb://127.0.0.1:27017/'
+            }  
+        }
 }
 
 
@@ -152,7 +159,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -162,7 +169,7 @@ USE_TZ = True
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend', # default authentication
-    'userAuthentication.backends.EmailBackend',  # Custom authentication backend for email
+    #'userAuthentication.backends.EmailBackend',  # Custom authentication backend for email
 ]
 
 # Static files (CSS, JavaScript, Images)
@@ -174,3 +181,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Twilio Account SID and Auth Token
+TWILIO_ACCOUNT_SID = 'AC2ef3fffdc6f6d22ec7066a4f347aac5c'
+TWILIO_AUTH_TOKEN = '0cdb5c0bc65f4293cae67f035a871834'
+
+# Twilio Phone Number (from which you'll send SMS)
+TWILIO_PHONE_NUMBER = '+12568249842'
