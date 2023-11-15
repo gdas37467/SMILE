@@ -1,33 +1,33 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Navbar from './Components/Navbar.jsx'
+import { Route, Routes } from 'react-router-dom'
+import Home from './Components/Home'
+import About from './Components/About'
+import DonateBlood from './Components/DonateBlood'
+import RequestBlood from './Components/RequestBlood'
+import Footer from './Components/Footer.jsx'
+import DonorDashboard from './Components/DonorDashboard.jsx'
+import RequestDashboard from './Components/RequestDashboard.jsx'
+
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      <Navbar /> 
+        <Routes> 
+            <Route exact path='/' element={<Home />} />       
+            <Route exact path='/about' element={<About />} />       
+            <Route exact path='/request' element={<RequestBlood />} />       
+            <Route exact path='/donate' element={<DonateBlood />} />       
+            <Route exact path='/donate/donordashboard' element={<DonorDashboard />} />       
+            <Route exact path='/request/requestdashboard' element={<RequestDashboard />} />       
+        </Routes> 
+      <Footer />
+
     </>
   )
 }
